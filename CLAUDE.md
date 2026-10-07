@@ -113,8 +113,8 @@ make -C internal test                                 # Swift unit tests: Boop's
 
 ## Repositories
 
-Boop is spread over four repositories. You work in all of them from
-here:
+Boop is spread over four repositories, and the organisation has a fifth
+for its profile. You work in the first four from here:
 
 | Repository | Visibility | Here at | What goes in it |
 | --- | --- | --- | --- |
@@ -122,6 +122,7 @@ here:
 | Mellow-Machines-Lab/AgentHooks | Public | `agent-hooks/`, a submodule | Reading coding agents' hooks: events, sessions, "needs you", the installer. Nothing of Boop |
 | Mellow-Machines-Lab/MellowHarness | Public | `mellowharness/`, a submodule | The generic multiple-choice brain: the log, lines, rules, outputs, the prompt, brains. Nothing of Boop |
 | Boop's character pack | Private | `characters/boop/`, an installed pack | Boop's slime: its prompts, voice bank, gel face, design, evals, goldens and their tools |
+| Mellow-Machines-Lab/.github | Public | not here: clone it beside this one | The organisation's profile README (`profile/README.md`), shown on github.com/Mellow-Machines-Lab, and later the community files every repository shares |
 
 **What goes where.**
 - Anything another app could use about agents' hooks goes in
