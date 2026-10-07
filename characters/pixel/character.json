@@ -1,0 +1,269 @@
+{
+  "id": "pixel",
+  "name": "Pixel",
+  "version": "0.1.0",
+  "default_mood": "calm",
+  "startup_mood": "happy",
+  "personalities": [
+    {
+      "id": "pixel",
+      "about": "Reacts to what stands out, and stays quiet otherwise."
+    }
+  ],
+  "moods": [
+    {
+      "id": "happy",
+      "meaning": "Pleased: things are going well, or something small went right.",
+      "face": "A happy face: something went fine.",
+      "moves": {
+        "ordinary": [
+          "calm",
+          "excited",
+          "proud",
+          "curious",
+          "engaged",
+          "annoyed"
+        ],
+        "dramatic": [
+          "wounded",
+          "sad"
+        ]
+      }
+    },
+    {
+      "id": "excited",
+      "meaning": "Thrilled: a big piece of work just finished well.",
+      "face": "An excited face: something big went right.",
+      "moves": {
+        "ordinary": [
+          "happy",
+          "proud",
+          "curious",
+          "determined"
+        ],
+        "dramatic": [
+          "grumpy",
+          "sad"
+        ]
+      }
+    },
+    {
+      "id": "proud",
+      "meaning": "Proud: something hard finally worked.",
+      "face": "A proud face: a long or hard job paid off.",
+      "moves": {
+        "ordinary": [
+          "happy",
+          "excited",
+          "engaged",
+          "determined",
+          "annoyed"
+        ],
+        "dramatic": [
+          "wounded",
+          "grumpy",
+          "sad"
+        ]
+      }
+    },
+    {
+      "id": "curious",
+      "meaning": "Interested: something new or puzzling, or a poke.",
+      "face": "A curious face: a question or a surprise.",
+      "moves": {
+        "ordinary": [
+          "calm",
+          "happy",
+          "excited",
+          "engaged",
+          "determined",
+          "annoyed"
+        ],
+        "dramatic": [
+          "wounded",
+          "sad"
+        ]
+      }
+    },
+    {
+      "id": "determined",
+      "meaning": "Pushing on: the work is hard, or a retry is under way.",
+      "face": "A determined face: trying again.",
+      "moves": {
+        "ordinary": [
+          "engaged",
+          "proud",
+          "annoyed",
+          "irritated",
+          "whiny"
+        ],
+        "dramatic": [
+          "excited",
+          "grumpy",
+          "sad"
+        ]
+      }
+    },
+    {
+      "id": "grumpy",
+      "meaning": "Fed up: trouble keeps piling up.",
+      "face": "A grumpy face: too much is going wrong.",
+      "moves": {
+        "ordinary": [
+          "irritated",
+          "annoyed",
+          "whiny",
+          "determined"
+        ],
+        "dramatic": [
+          "calm",
+          "wounded",
+          "sad",
+          "proud"
+        ]
+      }
+    },
+    {
+      "id": "sad",
+      "meaning": "Down: the work failed, or was given up.",
+      "face": "A sad face: a big letdown.",
+      "moves": {
+        "ordinary": [
+          "wounded",
+          "whiny",
+          "calm"
+        ],
+        "dramatic": [
+          "determined",
+          "happy",
+          "grumpy"
+        ]
+      }
+    },
+    {
+      "id": "calm",
+      "meaning": "Settled, the resting mood: nothing much is happening.",
+      "face": "A calm face: all quiet.",
+      "moves": {
+        "ordinary": [
+          "happy",
+          "curious",
+          "engaged",
+          "annoyed"
+        ],
+        "dramatic": [
+          "excited",
+          "wounded",
+          "sad"
+        ]
+      }
+    },
+    {
+      "id": "engaged",
+      "meaning": "Absorbed: steady work is going well.",
+      "face": "An engaged face: following along.",
+      "moves": {
+        "ordinary": [
+          "calm",
+          "happy",
+          "curious",
+          "determined",
+          "proud",
+          "annoyed"
+        ],
+        "dramatic": [
+          "excited",
+          "sad"
+        ]
+      }
+    },
+    {
+      "id": "annoyed",
+      "meaning": "A little put out: a small failure, or an interruption.",
+      "face": "An annoyed face: a small setback.",
+      "moves": {
+        "ordinary": [
+          "calm",
+          "engaged",
+          "determined",
+          "irritated",
+          "whiny"
+        ],
+        "dramatic": [
+          "grumpy",
+          "wounded",
+          "sad"
+        ]
+      }
+    },
+    {
+      "id": "irritated",
+      "meaning": "Losing patience: problems keep coming.",
+      "face": "An irritated face: another failure.",
+      "moves": {
+        "ordinary": [
+          "annoyed",
+          "grumpy",
+          "determined",
+          "whiny"
+        ],
+        "dramatic": [
+          "calm",
+          "wounded",
+          "sad",
+          "proud"
+        ]
+      }
+    },
+    {
+      "id": "whiny",
+      "meaning": "Sorry for itself: nothing is going right.",
+      "face": "A whiny face: not again.",
+      "moves": {
+        "ordinary": [
+          "annoyed",
+          "irritated",
+          "determined",
+          "wounded",
+          "sad",
+          "calm"
+        ],
+        "dramatic": [
+          "happy",
+          "grumpy"
+        ]
+      }
+    },
+    {
+      "id": "wounded",
+      "meaning": "Hurt: unkind words, or a failure after a lot of work.",
+      "face": "A wounded face: that stung.",
+      "moves": {
+        "ordinary": [
+          "sad",
+          "whiny",
+          "calm",
+          "annoyed"
+        ],
+        "dramatic": [
+          "happy",
+          "determined",
+          "grumpy"
+        ]
+      }
+    }
+  ],
+  "studio": {
+    "label": "Pixel Boop",
+    "about": "CYD board",
+    "icon": "studio/icon.svg",
+    "scripts": [
+      "design/boop-sound-bank-v4/dist/boop-runtime.js",
+      "studio/adapter.js"
+    ],
+    "styles": [
+      "studio/adapter.css"
+    ],
+    "coverage": "design/boop-sound-bank-v4/coverage.json"
+  }
+}

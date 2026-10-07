@@ -1,0 +1,5 @@
+interface:
+  display_name: "Webcam Verification"
+  short_description: "Opt-in webcam review of Boop on the board"
+policy:
+  allow_implicit_invocation: false

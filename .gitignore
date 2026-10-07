@@ -1,0 +1,68 @@
+.pio/
+.platformio-core/
+.vscode/
+.DS_Store
+data/
+
+
+# Claude Code — ignore local settings
+.claude/*
+!.claude/skills/
+
+# Codex — track only the shared skills
+.codex/*
+!.codex/skills/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+.venv
+venv/
+
+# Swift / SPM
+.build/
+.swiftpm/
+Package.resolved.bak
+
+# The landing page is a repo of its own, cloned here
+/landing/
+
+# JavaScript
+node_modules/
+
+# Local logs, env, keys, app state and generated reports
+*.log
+.env
+.env.*
+*.pem
+*.p8
+*.p12
+*.mobileprovision
+*.sqlite
+*.sqlite-*
+
+# Snapshot and temporary outputs
+snapshots/
+tmp/
+*.tmp
+.vercel
+
+# Packaging output
+build/
+
+# Next.js generated output
+.next/
+*.tsbuildinfo
+internal/app/Tests/GeneratedTestRunner.swift
+
+# The chosen character pack, staged for the builds, and the local choice
+# (characters/CHARACTER.md §2)
+.character-build/
+.character
+
+# The studio page's data, which characters/charactergen.py writes for the packs here
+characters/studio/packs.js

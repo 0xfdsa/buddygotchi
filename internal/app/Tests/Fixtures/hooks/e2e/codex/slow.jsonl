@@ -1,0 +1,19 @@
+# J1: a Codex approval left for 10 s: "needs you" appears once the 2 s grace
+# period is over, and clears when the command runs.
+{"hook_event_name": "SessionStart", "session_id": "e2e-codex-slow", "cwd": "/tmp/landing", "source": "startup"}
+{"hook_event_name": "UserPromptSubmit", "session_id": "e2e-codex-slow", "cwd": "/tmp/landing", "prompt": "PRIVATE_PROMPT_9001 ship it"}
+{"expect": {"base": "working"}}
+{"hook_event_name": "PreToolUse", "session_id": "e2e-codex-slow", "cwd": "/tmp/landing", "tool_name": "shell", "tool_input": {"command": ["bash", "-lc", "vercel --prod"]}}
+{"hook_event_name": "PermissionRequest", "session_id": "e2e-codex-slow", "cwd": "/tmp/landing", "tool_name": "shell", "tool_input": {"command": ["bash", "-lc", "vercel --prod PRIVATE_ARG_9002"]}}
+{"expect_not": {"screen": "needs_you"}, "until_ms": 1800}
+{"expect": {"screen": "needs_you", "attn": {"agent": "codex", "project": "landing"}}, "within_ms": 2000}
+{"wait_ms": 6000}
+{"expect": {"screen": "needs_you"}, "shot": "codex-needs-you"}
+{"hook_event_name": "PostToolUse", "session_id": "e2e-codex-slow", "cwd": "/tmp/landing", "tool_name": "shell", "tool_response": "PRIVATE_OUTPUT_9003"}
+{"expect": {"base": "working", "attn": null}}
+{"advance_ms": 45000}
+{"hook_event_name": "Stop", "session_id": "e2e-codex-slow", "cwd": "/tmp/landing", "last_assistant_message": "PRIVATE_CLOSING_9004"}
+# The brain's finish, which waits its turn behind a line still playing, 5 s at most.
+{"expect": {"moment": {"anim": "task_complete"}}, "within_ms": 6000}
+# Room for the last finish to end: its line starts in its voice window.
+{"wait_ms": 10000}

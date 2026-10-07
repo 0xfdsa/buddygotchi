@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0"><dict>
+<key>CFBundleIdentifier</key><string>com.boop.webcam-verification</string>
+<key>CFBundleName</key><string>Boop Webcam Verification</string>
+<key>NSCameraUsageDescription</key><string>Record Buddy's screen to verify physical animations and timing. No audio is recorded.</string>
+</dict></plist>

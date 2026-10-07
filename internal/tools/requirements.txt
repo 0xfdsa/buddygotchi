@@ -1,0 +1,4 @@
+pyserial==3.5
+Pillow==12.3.0
+textual==8.2.8
+rich==15.0.0

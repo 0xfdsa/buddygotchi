@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Character Studio</title>
+<link rel="stylesheet" href="studio.css">
+<script src="packs.js" defer></script>
+<script src="studio.js" defer></script>
+</head>
+<body>
+<div class="app" id="studio">
+
+<header class="top">
+  <div class="brand">
+    <h1>Character Studio</h1>
+    <p>Pick a mood and a state to see what the character does.</p>
+    <label class="pack-choice" data-pack-choice hidden><span>Pack</span><select data-pack></select></label>
+  </div>
+  <div class="characters" role="tablist" aria-label="Character" data-cards></div>
+</header>
+
+<p class="missing" data-missing hidden>No pack data yet. From the repository root, run <code>python3 characters/charactergen.py</code>, then reload.</p>
+
+<main class="layout">
+  <section class="stage-column" aria-label="Preview">
+    <div class="stage-frame">
+      <div class="stage" id="stage"></div>
+      <p class="empty" data-empty hidden></p>
+      <button type="button" class="start" data-start hidden>▶&nbsp; Start</button>
+    </div>
+    <div class="status" data-status aria-live="polite"></div>
+
+    <div class="now">
+      <h2 data-title></h2>
+      <p data-caption></p>
+      <dl class="meaning">
+        <dt data-mood-term></dt><dd data-mood-describe></dd>
+        <dt data-state-term></dt><dd data-state-describe></dd>
+      </dl>
+      <p class="note" data-note hidden></p>
+    </div>
+
+    <div class="row variants" data-variants>
+      <button type="button" class="icon" data-prev aria-label="Previous variation">‹</button>
+      <label class="grow"><span class="visually-hidden" data-variation-label>Variation</span><select data-variation></select></label>
+      <button type="button" class="icon" data-next aria-label="Next variation">›</button>
+    </div>
+
+    <div class="row" data-facts hidden></div>
+    <div class="row" data-faces hidden><span class="row-label">Face</span><div class="segmented" data-face-choice role="group" aria-label="Face"></div></div>
+
+    <div class="row transport" data-transport="clip" hidden>
+      <button type="button" class="primary" data-play>Play</button>
+      <label class="check"><input type="checkbox" data-loop checked> Loop</label>
+      <label class="grow scrub"><span class="visually-hidden">Inspect frame</span><input type="range" data-seek min="0" max="10" step="0.01" value="0"></label>
+      <span class="time" data-time>0.0 s</span>
+    </div>
+    <div class="row transport" data-transport="live" hidden>
+      <button type="button" class="primary" data-pause>Pause</button>
+      <button type="button" data-replay>Replay state</button>
+      <button type="button" data-poke>Poke</button>
+      <button type="button" data-shake>Shake</button>
+    </div>
+
+    <div class="row sound">
+      <button type="button" data-sound aria-pressed="false">Sound off</button>
+      <label class="grow volume"><span>Volume</span><input type="range" data-volume min="0" max="100" value="50"></label>
+    </div>
+  </section>
+
+  <section class="pick-column" aria-label="Choose">
+    <div class="picker">
+      <div class="picker-head"><h3>Mood</h3><span>how it feels</span></div>
+      <div data-moods></div>
+      <p class="legend" data-legend hidden><span class="chip borrowed sample">Dashed</span> moods have no art of their own on this character. It shows the mood after the arrow instead.</p>
+    </div>
+    <div class="picker">
+      <div class="picker-head"><h3>State</h3><span>what the agents are doing</span></div>
+      <div data-states></div>
+    </div>
+  </section>
+</main>
+
+<details class="tools" data-tools hidden>
+  <summary>Tools</summary>
+  <div data-tools-body></div>
+</details>
+
+<footer class="foot">
+  <p><kbd>←</kbd><kbd>→</kbd> variation · <kbd>↑</kbd><kbd>↓</kbd> state · <kbd>Space</kbd> play or pause · <kbd>S</kbd> sound · <kbd>P</kbd> poke</p>
+  <p>Works offline. Nothing here talks to the app, the board or the network. Each character's preview comes from its own pack.</p>
+</footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,32 @@
+# J1: one Claude Code session through the whole pipeline (VERIFICATION.md L4).
+# Lines with "expect" are boopctl e2e checkpoints on the device's dbg.state;
+# "advance_ms" jumps the headless app's clock. boopdev replay skips the one
+# and treats the other as time passing.
+{"hook_event_name": "SessionStart", "session_id": "e2e-claude-1", "cwd": "/tmp/jetpack", "source": "startup"}
+{"hook_event_name": "UserPromptSubmit", "session_id": "e2e-claude-1", "cwd": "/tmp/jetpack", "prompt": "PRIVATE_PROMPT_7001 fix the flaky test"}
+{"expect": {"base": "working", "attn": null}}
+{"hook_event_name": "PreToolUse", "session_id": "e2e-claude-1", "cwd": "/tmp/jetpack", "tool_name": "Bash", "tool_input": {"command": "swift test --filter PRIVATE_ARG_7002"}}
+{"hook_event_name": "PostToolUse", "session_id": "e2e-claude-1", "cwd": "/tmp/jetpack", "tool_name": "Bash", "tool_response": {"stdout": "PRIVATE_OUTPUT_7003"}}
+{"hook_event_name": "PreToolUse", "session_id": "e2e-claude-1", "cwd": "/tmp/jetpack", "tool_name": "Edit", "tool_input": {"file_path": "/tmp/jetpack/Sources/Flaky.swift", "old_string": "PRIVATE_OLD_7004", "new_string": "PRIVATE_NEW_7005"}}
+{"hook_event_name": "PostToolUse", "session_id": "e2e-claude-1", "cwd": "/tmp/jetpack", "tool_name": "Edit", "tool_response": {"success": true}}
+{"hook_event_name": "PreToolUse", "session_id": "e2e-claude-1", "cwd": "/tmp/jetpack", "tool_name": "Bash", "tool_input": {"command": "git push origin PRIVATE_BRANCH_7006"}}
+{"hook_event_name": "PermissionRequest", "session_id": "e2e-claude-1", "cwd": "/tmp/jetpack", "tool_name": "Bash", "tool_input": {"command": "git push origin PRIVATE_BRANCH_7006"}}
+{"expect": {"screen": "needs_you", "attn": {"agent": "claude", "project": "jetpack", "more": 0}}, "within_ms": 500}
+{"hook_event_name": "Notification", "session_id": "e2e-claude-1", "cwd": "/tmp/jetpack", "notification_type": "permission_prompt", "message": "PRIVATE_MESSAGE_7007"}
+{"wait_ms": 3000}
+{"expect": {"screen": "needs_you"}, "shot": "claude-needs-you"}
+{"hook_event_name": "PostToolUse", "session_id": "e2e-claude-1", "cwd": "/tmp/jetpack", "tool_name": "Bash", "tool_response": {"stdout": "PRIVATE_OUTPUT_7008"}}
+{"expect": {"base": "working", "attn": null}}
+{"advance_ms": 400000}
+{"hook_event_name": "Stop", "session_id": "e2e-claude-1", "cwd": "/tmp/jetpack", "last_assistant_message": "PRIVATE_CLOSING_7009"}
+# The brain's finish, which waits its turn behind a line still playing, 5 s at most.
+{"expect": {"moment": {"anim": "task_complete"}}, "within_ms": 6000}
+{"wait_ms": 4000}
+{"hook_event_name": "UserPromptSubmit", "session_id": "e2e-claude-1", "cwd": "/tmp/jetpack", "prompt": "PRIVATE_PROMPT_7010 now deploy it"}
+{"expect": {"base": "working"}}
+{"hook_event_name": "PreToolUse", "session_id": "e2e-claude-1", "cwd": "/tmp/jetpack", "tool_name": "Bash", "tool_input": {"command": "vercel --prod PRIVATE_ARG_7011"}}
+{"advance_ms": 40000}
+{"hook_event_name": "PostToolUseFailure", "session_id": "e2e-claude-1", "cwd": "/tmp/jetpack", "tool_name": "Bash", "tool_input": {"command": "vercel --prod PRIVATE_ARG_7011"}, "error": "Exit code 1\nPRIVATE_ERROR_7013"}
+{"hook_event_name": "StopFailure", "session_id": "e2e-claude-1", "cwd": "/tmp/jetpack", "error": "rate_limit", "last_assistant_message": "PRIVATE_CLOSING_7012"}
+{"expect": {"base": "idle", "attn": null}, "within_ms": 1000}
+{"wait_ms": 4000}

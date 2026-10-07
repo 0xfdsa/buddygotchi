@@ -1,0 +1,19 @@
+# J1: a Codex approval answered within the 2 s grace period: no "needs you".
+{"hook_event_name": "SessionStart", "session_id": "e2e-codex-quick", "cwd": "/tmp/landing", "source": "startup"}
+{"hook_event_name": "UserPromptSubmit", "session_id": "e2e-codex-quick", "cwd": "/tmp/landing", "prompt": "PRIVATE_PROMPT_8001 run the tests"}
+{"expect": {"base": "working"}}
+{"hook_event_name": "PreToolUse", "session_id": "e2e-codex-quick", "cwd": "/tmp/landing", "tool_name": "shell", "tool_input": {"command": ["bash", "-lc", "npm test"]}}
+{"hook_event_name": "PermissionRequest", "session_id": "e2e-codex-quick", "cwd": "/tmp/landing", "tool_name": "shell", "tool_input": {"command": ["bash", "-lc", "npm test PRIVATE_ARG_8002"]}}
+{"wait_ms": 500}
+{"hook_event_name": "PostToolUse", "session_id": "e2e-codex-quick", "cwd": "/tmp/landing", "tool_name": "shell", "tool_response": "PRIVATE_OUTPUT_8003"}
+{"expect_not": {"screen": "needs_you"}, "for_ms": 3000}
+{"expect": {"base": "working", "attn": null}}
+# Let the brain's line play out before the app's clock jumps: the app times
+# a line on its own clock, the board on real time, so a jump mid-line frees
+# the line for the next reaction, which then cuts it.
+{"wait_ms": 2500}
+{"advance_ms": 45000}
+{"hook_event_name": "Stop", "session_id": "e2e-codex-quick", "cwd": "/tmp/landing", "last_assistant_message": "PRIVATE_CLOSING_8004"}
+# The brain's finish, which waits its turn behind a line still playing, 5 s at most.
+{"expect": {"moment": {"anim": "task_complete"}}, "within_ms": 6000}
+{"wait_ms": 4000}

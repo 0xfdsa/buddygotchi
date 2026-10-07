@@ -1,0 +1,49 @@
+{
+  "groups": [
+    {"label": "Resting", "states": [
+      {"id": "idle", "about": "Awake. Agents are open but none is working."},
+      {"id": "asleep", "about": "No agent sessions at all, so the creature sleeps."},
+      {"id": "no_app", "label": "No Mac", "about": "The board has lost the Mac, so it rests on its own."}
+    ]},
+    {"label": "Starting", "states": [
+      {"id": "listening", "about": "You are holding the button to talk to it."},
+      {"id": "starting", "about": "An agent has just started a task, a session or a continuation."}
+    ]},
+    {"label": "Working", "states": [
+      {"id": "planning", "about": "The agent is planning."},
+      {"id": "working", "about": "The agent is working, with nothing more specific to show."},
+      {"id": "terminal", "about": "Running a shell command."},
+      {"id": "tool_use", "label": "Tool use", "about": "Using a tool, such as an edit."},
+      {"id": "searching", "about": "Searching the web."},
+      {"id": "analyzing", "about": "Reading and searching files."},
+      {"id": "testing", "about": "Running tests."},
+      {"id": "delegating", "about": "Handing work to a helper agent."},
+      {"id": "helper_return", "label": "Helper back", "about": "A helper agent has come back."}
+    ]},
+    {"label": "Needs you", "states": [
+      {"id": "waiting", "about": "Quiet while a tool takes its time. Nothing is asked of you."},
+      {"id": "needs_you", "label": "Needs you", "about": "An agent is waiting for your approval or answer on the Mac. The creature never approves anything."}
+    ]},
+    {"label": "Finished", "states": [
+      {"id": "reply_ready", "label": "Reply ready", "about": "The agent has replied."},
+      {"id": "task_complete", "label": "Task complete", "about": "A task is done. Pick whether it went well or badly."},
+      {"id": "error", "label": "Tool error", "about": "A tool failed. That doesn't mean the task failed."},
+      {"id": "stopped", "about": "The turn was interrupted."}
+    ]},
+    {"label": "Touch", "states": [
+      {"id": "poked", "about": "Someone tapped it."},
+      {"id": "tap_spam", "label": "Tap spam", "about": "Lots of taps in a row."}
+    ]}
+  ],
+  "facts": {
+    "task_complete": {"name": "outcome", "label": "Outcome", "options": [
+      {"id": "success", "label": "Success"},
+      {"id": "failure", "label": "Failure"}
+    ]},
+    "starting": {"name": "context", "label": "Start context", "options": [
+      {"id": "new_task", "label": "New task"},
+      {"id": "session", "label": "New session"},
+      {"id": "continuation", "label": "Continuing"}
+    ]}
+  }
+}

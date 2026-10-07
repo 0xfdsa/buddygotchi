@@ -1,0 +1,7 @@
+# The firmware's C++ style: Google's, 120 columns, includes left in the
+# order written. The gel face (render/gel/) and its tests are formatted
+# with it; older files follow it closely and are reformatted only when edited.
+BasedOnStyle: Google
+ColumnLimit: 120
+SortIncludes: Never
+AllowShortCaseLabelsOnASingleLine: true

@@ -1,0 +1,10 @@
+#!/bin/sh
+# Boop's device tool (internal/VERIFICATION.md §2). Runs in internal/tools/.venv, with
+# pyserial, Pillow and Textual; the first run makes it (`make -C internal tools`).
+here=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+py="$here/.venv/bin/python"
+if [ ! -x "$py" ]; then
+  echo "boopctl: making internal/tools/.venv (pyserial, Pillow, Textual)" >&2
+  make -s -C "$here/.." tools >&2 || exit 2
+fi
+PYTHONPATH="$here${PYTHONPATH:+:$PYTHONPATH}" exec "$py" -m boopctl_lib "$@"

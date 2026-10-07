@@ -1,0 +1,52 @@
+# The checks anyone can run without a board, a key or Bluetooth
+# (internal/VERIFICATION.md L0 and L1): Boop's Swift tests and the
+# packages', then the firmware's and LinkKit's device tests on the Mac.
+#
+# Boop is written with Swift 6.4, and the newest runner has Xcode 26.6's
+# Swift, so code here has to compile on both. A failure's errors and failed
+# tests also show as annotations on the run, readable without signing in.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  swift:
+    name: Swift tests
+    runs-on: macos-26
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09  # v5
+        with:
+          submodules: true  # agent-hooks/ and mellowharness/
+      - run: swift --version
+      - name: Build, then Boop's tests and each package's
+        run: |
+          set -o pipefail
+          make -C internal test 2>&1 | tee test.log
+      - name: Show the errors
+        if: failure()
+        run: |
+          sed 's/\x1b\[[0-9;]*m//g' test.log | grep -E "error:|✘|FAIL|failed" | sort -u | head -20 |
+            while IFS= read -r line; do echo "::error title=Swift tests::$line"; done
+
+  firmware:
+    name: Firmware tests
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09  # v5
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065  # v5
+        with:
+          python-version: "3.12"
+      - name: Install PlatformIO
+        run: pip install platformio==6.2.0
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830  # v4
+        with:
+          path: firmware/.platformio-core
+          key: pio-${{ runner.os }}-${{ hashFiles('firmware/platformio.ini', 'linkkit/device/platformio.ini') }}
+      - name: Boop's firmware tests, then LinkKit's device tests
+        run: make -C internal fw-test

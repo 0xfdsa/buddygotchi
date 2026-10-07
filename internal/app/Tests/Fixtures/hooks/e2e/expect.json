@@ -1,0 +1,3 @@
+{
+  "events": ["claude started turn 1 on", "claude finished turn 1 on", "claude's deploy failed on", "\"error\":\"rate_limit\"", "codex finished turn 1 on"]
+}

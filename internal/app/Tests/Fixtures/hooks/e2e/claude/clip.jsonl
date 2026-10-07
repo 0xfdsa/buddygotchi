@@ -1,0 +1,11 @@
+# J1 L3: a Claude session squeezed into a 10 s webcam clip. Working, "needs
+# you", approved, a 6-minute turn finishing (its finish), then the brain.
+{"hook_event_name": "SessionStart", "session_id": "e2e-clip", "cwd": "/tmp/jetpack", "source": "startup"}
+{"hook_event_name": "UserPromptSubmit", "session_id": "e2e-clip", "cwd": "/tmp/jetpack", "prompt": "PRIVATE_PROMPT_6001 fix it"}
+{"hook_event_name": "PreToolUse", "session_id": "e2e-clip", "cwd": "/tmp/jetpack", "tool_name": "Bash", "tool_input": {"command": "swift test"}}
+{"wait_ms": 800}
+{"hook_event_name": "PermissionRequest", "session_id": "e2e-clip", "cwd": "/tmp/jetpack", "tool_name": "Bash", "tool_input": {"command": "PRIVATE_COMMAND_6002"}}
+{"wait_ms": 1800}
+{"hook_event_name": "PostToolUse", "session_id": "e2e-clip", "cwd": "/tmp/jetpack", "tool_name": "Bash", "tool_response": {"stdout": "PRIVATE_OUTPUT_6003"}}
+{"advance_ms": 400000}
+{"hook_event_name": "Stop", "session_id": "e2e-clip", "cwd": "/tmp/jetpack", "last_assistant_message": "PRIVATE_CLOSING_6004"}

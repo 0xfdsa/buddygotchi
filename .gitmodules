@@ -1,0 +1,6 @@
+[submodule "agent-hooks"]
+	path = agent-hooks
+	url = https://github.com/Mellow-Machines-Lab/AgentHooks.git
+[submodule "mellowharness"]
+	path = mellowharness
+	url = https://github.com/Mellow-Machines-Lab/MellowHarness.git

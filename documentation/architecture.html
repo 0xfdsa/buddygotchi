@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- Boop's architecture on one page: the shape, one turn through every piece, where Boop meets its packages. Edit by hand; open in a browser. -->
+<title>Boop's Architecture</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+:root{
+  --ground:#eef1f4; --panel:#ffffff; --ink:#18202b; --ink2:#4a5566; --ink3:#7a8597; --rule:#d5dbe3;
+  --a:#13806a; --a-soft:#d9f0ea; --b:#5a4fcf; --b-soft:#e6e3fb; --c:#b86e0e; --c-soft:#f8ead3;
+  --boop:#d13f78; --boop-soft:#fae1eb; --ext:#5d6b7e; --ext-soft:#e4e9ef;
+  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible",ui-sans-serif,system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --ground:#11161d; --panel:#19202a; --ink:#e7ecf2; --ink2:#a9b4c3; --ink3:#7d8899; --rule:#2c3644;
+    --a:#3cc4a3; --a-soft:#163a33; --b:#9b92ff; --b-soft:#26244a; --c:#e9a446; --c-soft:#3b2c14;
+    --boop:#f06b9e; --boop-soft:#3d1a2a; --ext:#93a1b4; --ext-soft:#232c38;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --ground:#11161d; --panel:#19202a; --ink:#e7ecf2; --ink2:#a9b4c3; --ink3:#7d8899; --rule:#2c3644;
+  --a:#3cc4a3; --a-soft:#163a33; --b:#9b92ff; --b-soft:#26244a; --c:#e9a446; --c-soft:#3b2c14;
+  --boop:#f06b9e; --boop-soft:#3d1a2a; --ext:#93a1b4; --ext-soft:#232c38;
+}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;margin:0;padding-inline:16px}
+.wrap{max-width:980px;margin:0 auto;padding-block:28px 64px;display:flex;flex-direction:column;gap:44px}
+h1,h2,h3{font-family:var(--display);line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:clamp(30px,5vw,44px);font-weight:700;letter-spacing:-.01em}
+h2{font-size:26px;font-weight:700}
+h3{font-size:18px;font-weight:700;margin-top:8px}
+p{margin:0;max-width:70ch}
+a{color:var(--b)}
+code{font-family:var(--mono);font-size:.86em}
+header{display:flex;flex-direction:column;gap:12px}
+.lede{font-size:18px;color:var(--ink2)}
+.small{font-size:13px;color:var(--ink3)}
+nav.toc{display:flex;flex-wrap:wrap;gap:6px;position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--ground);padding-block:8px;border-bottom:1px solid var(--rule)}
+nav.toc a{font-size:14px;color:var(--ink2);text-decoration:none;padding:5px 11px;border-radius:7px}
+nav.toc a:hover,nav.toc a:focus-visible{background:var(--panel);color:var(--ink);outline:none}
+section{display:flex;flex-direction:column;gap:16px;scroll-margin-top:60px}
+.panel{background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:20px}
+.scroll{overflow-x:auto}
+/* the shape */
+.box{border:1.5px solid var(--ext);background:var(--ext-soft);border-radius:10px;padding:10px 14px}
+.box b{font-family:var(--display);font-size:16px}
+.box p{font-size:14px;color:var(--ink2)}
+.box.a{border-color:var(--a);background:var(--a-soft)}
+.box.b{border-color:var(--b);background:var(--b-soft)}
+.box.c{border-color:var(--c);background:var(--c-soft)}
+.box.boop{border-color:var(--boop);background:var(--boop-soft)}
+/* the flow: a left column of pieces, a right column of what each sends, wires between */
+.flow{--inset:13.5px;--cols:minmax(0,1fr) minmax(0,1.6fr);--gap:28px;display:flex;flex-direction:column}
+.frame{--fc:var(--boop);border:1.5px dashed var(--fc);border-radius:12px;padding:12px;background:var(--panel)}
+.frame.a{--fc:var(--a)}
+.frame.c{--fc:var(--c)}
+.frame>.label{display:block;font-family:var(--mono);font-size:12px;color:var(--fc);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
+.flow>ol.hops,.flow>.solo{padding-inline:var(--inset)}
+ol.hops{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.hop{display:grid;grid-template-columns:var(--cols);column-gap:var(--gap);align-items:stretch}
+.pay{position:relative;display:flex;flex-direction:column;min-width:0;border:1px solid var(--rule);border-radius:10px;background:var(--panel)}
+.frame .pay{background:var(--ground)}
+.pay .what{font-family:var(--mono);font-size:12px;color:var(--ink2);padding:7px 12px;border-bottom:1px solid var(--rule)}
+.pay pre{margin:0;padding:10px 12px;font-family:var(--mono);font-size:12px;line-height:1.5;white-space:pre-wrap;overflow-wrap:break-word;color:var(--ink);flex:1}
+.pay>.small{padding:0 12px 10px}
+/* box → card: "this piece sends this" */
+.pay::before{content:"";position:absolute;left:calc(-1 * var(--gap) + 3px);top:16px;width:calc(var(--gap) - 9px);border-top:2px solid var(--ink3)}
+.pay::after{content:"";position:absolute;left:-7px;top:12px;border:5px solid transparent;border-left:6px solid var(--ink3);border-right:0}
+/* piece → next piece */
+.link{display:grid;grid-template-columns:var(--cols);column-gap:var(--gap)}
+.wire{position:relative;min-height:46px}
+.wire::before{content:"";position:absolute;left:50%;top:0;bottom:7px;border-left:2px solid var(--ink3)}
+.wire::after{content:"";position:absolute;left:calc(50% - 5px);bottom:0;border:6px solid transparent;border-top:7px solid var(--ink3);border-bottom:0}
+.wire span{position:absolute;left:calc(50% + 12px);right:-8px;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:11.5px;line-height:1.35;color:var(--ink2)}
+.wire span code{font-size:1em}
+@media (min-width:721px){.wire span{right:auto;white-space:nowrap}}
+@media (max-width:720px){
+  .hop{grid-template-columns:1fr;row-gap:8px}
+  .link{grid-template-columns:1fr}
+  .pay::before,.pay::after{display:none}
+}
+@media (max-width:720px){.hop{grid-template-columns:1fr}}
+/* tables */
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font-weight:700;color:var(--ink2);font-size:13px}
+td.date{font-family:var(--mono);font-size:12.5px;color:var(--ink3);white-space:nowrap}
+td.where{font-size:13px;white-space:nowrap}
+.decisions td:nth-child(2){min-width:260px}
+.decisions td:nth-child(3){color:var(--ink2);min-width:220px}
+@media (max-width:640px){
+  table,tbody,tr,td{display:block}
+  thead{display:none}
+  tr{border-bottom:1px solid var(--rule);padding:10px 0}
+  td{border:0;padding:2px 0}
+  td.where{white-space:normal}
+  .decisions td:nth-child(2),.decisions td:nth-child(3){min-width:0}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>Boop's architecture</h1>
+  <p class="lede">How Boop's pieces fit together, and what each one sends to the next. The code is the detail: each piece below names where it lives, and the packages' own <code>ARCHITECTURE.md</code> files explain them.</p>
+  <p class="small">Updated 2026-10-05.</p>
+</header>
+
+<nav class="toc" aria-label="Sections">
+  <a href="#shape">The shape</a>
+  <a href="#joins">Where the pieces join</a>
+</nav>
+
+<section id="shape">
+  <h2>The shape</h2>
+  <p>Boop is a Mac app plus a small screen on your desk. Data flows one way: from your coding agents (Claude Code, Codex), through the Mac app, to the device. Boop only watches and reports. It never approves or blocks anything an agent does. Three packages handle the general parts (reading agent hooks, asking the multiple-choice model, talking to the device), and they know nothing about Boop or each other. Boop's own code connects them.</p>
+  <p>Below, one Claude Code turn finishes and we follow it through. Each row shows a piece on the left and what it sends next on the right. The examples come from a real run, cut short where you see <code>…</code>.</p>
+
+  <div class="flow">
+  <ol class="hops" aria-label="One finished turn, piece by piece">
+    <li class="hop">
+      <div class="box"><b>Claude Code</b><p>When a turn ends, Claude Code runs its <code>Stop</code> hook, which calls <code>agent-hook claude --keep-text</code>.</p></div>
+      <div class="pay"><span class="what">Hook JSON on stdin (trimmed)</span>
+<pre>{
+  "hook_event_name": "Stop",
+  "session_id": "s1",
+  "cwd": "/Users/me/src/api",
+  "last_assistant_message": "Fixed the flaky login test; all 42 tests pass.",
+  …
+}</pre></div>
+    </li>
+  </ol>
+  <div class="link solo"><div class="wire"><span>runs it with the hook's JSON</span></div></div>
+  <div class="frame a">
+    <span class="label">agent-hooks (agent-hooks/)</span>
+    <ol class="hops">
+      <li class="hop">
+        <div class="box a"><b>agent-hook</b><p>Keeps a few fields and sends one line to each app listening in <code>~/.agent-hooks/sockets/</code>, allowing 50 ms per app. It never waits for a reply and always exits successfully, so it can't slow the agent down.</p></div>
+        <div class="pay"><span class="what">One JSON line to <code>boop.sock</code> (trimmed)</span>
+  <pre>{
+  "agent": "claude",
+  "hook": "Stop",
+  "session": "s1",
+  "cwd": "/Users/me/src/api",
+  "message": "Fixed the flaky login test; all 42 tests pass.",
+  "mode": "default",
+  "ts": 1791177858109,
+  …
+}</pre></div>
+      </li>
+    </ol>
+  </div>
+
+  <div class="link solo"><div class="wire"><span>Unix socket <code>boop.sock</code> · one line, no reply</span></div></div>
+  <div class="frame mac">
+    <span class="label">Boop Mac app (app/)</span>
+    <ol class="hops">
+      <li class="hop">
+        <div class="box boop"><b>Adapter → transcript</b><p>Turns the hook into an event and appends it to today's transcript file. Every later step reads from that file.</p></div>
+        <div class="pay"><span class="what">The event in <code>transcript/&lt;date&gt;.jsonl</code></span>
+<pre>{
+  "seq": 11,
+  "at": 1791177961075,
+  "source": "claude",
+  "kind": "turn_end",
+  "data": {
+    "cwd": "/Users/me/src/api",
+    "outcome": "done",
+    "session": "s1",
+    "specific_type": "Stop",
+    "message": "Fixed the flaky login test; …"
+  }
+}</pre></div>
+      </li>
+      <li class="link"><div class="wire"><span>the new event</span></div></li>
+      <li class="hop">
+        <div class="box boop"><b>Core: the rules</b><p>Applies Boop's fixed rules: the session is now idle, so the screen changes. The new screen state goes to the device right away, before Jev is asked anything.</p></div>
+        <div class="pay"><span class="what"><code>state</code> to the device, through LinkKit</span>
+<pre>{
+  "t": "state",
+  "base": "idle",
+  "mood": "calm",
+  "busy": 0,
+  "vol": 6,
+  "variant": 1
+}</pre></div>
+      </li>
+      <li class="link"><div class="wire"><span>the event, read from the transcript</span></div></li>
+      <li class="hop">
+        <div class="box boop"><b>View: sentences for Jev</b><p><code>TranscriptView</code> writes the event as a sentence Jev can read, using earlier events for context, such as when the turn started and how many tools it used. A finished turn is worth asking Jev about.</p></div>
+        <div class="pay"><span class="what">The end of the prompt Jev reads</span>
+<pre>HISTORY (oldest first; indented lines add to the line above)
+1 min ago: claude started turn 1 on "api".
+  You asked: "Fix the flaky login test"
+
+NOW (14:26, Monday)
+claude finished turn 1 on "api": done, a long turn, 3 tool calls.
+  Its last message: "Fixed the flaky login test; all 42 tests pass."
+Boop did nothing on its own.</pre></div>
+      </li>
+      <li class="link"><div class="wire"><span>the sentence, with recent history</span></div></li>
+      <li class="hop">
+        <div class="box b"><b>MellowHarness + Jev</b> <span class="small">package</span><p>Builds the prompt: Boop's personality and rules (the steering files), then recent history, then the new event. It asks all of Boop's questions in one request to Jev, the multiple-choice model. Every question is multiple choice, and each option says when it applies and when it doesn't.</p></div>
+        <div class="pay"><span class="what">Two of the questions (options trimmed), and the answers</span>
+<pre>After NOW, what is Boop's mood?
+  calm      Stay calm: NOW is no reason MOOD gives to leave it…
+  happy     Good spirits: work is going well, or a win just came…
+  excited   Thrilled: a very long turn finished done…
+            not for: a shorter turn finishing…
+  …
+react.mood: none | happy | excited | proud | curious | …
+
+mood calm · react.mood excited · react.animation success
+react.loops once · say.feeling none · say.about start · say.kind word</pre>
+        <span class="small">From a test run with a stand-in for Jev that always gives the same answers, which is why a finished turn gets the topic "start". Jev answers the same questions, with a probability for each option.</span></div>
+      </li>
+      <li class="link"><div class="wire"><span>Jev's answers</span></div></li>
+      <li class="hop">
+        <div class="box boop"><b>Actions and Voice</b><p><code>mood</code> keeps or changes Boop's mood. <code>react</code> picks a recorded voice clip (a take) that fits the face, then sends the reaction to the device. Boop counts it as in progress until the device says it's finished.</p></div>
+        <div class="pay"><span class="what"><code>do</code> to the device: play this when you can</span>
+<pre>{
+  "t": "do",
+  "id": 558386703,
+  "name": "task_complete",
+  "play": "next",
+  "ttl": 5000,
+  "args": {
+    "outcome": "success",
+    "variant": 2,
+    "who": { "agent": "claude", "thread": "api" },
+    "say": { "take": "new.d02" },
+    "mood": "proud"
+  }
+}</pre>
+        <span class="small">From a run on the board, where Jev chose a proud face.</span></div>
+      </li>
+    </ol>
+  </div>
+  <div class="link solo"><div class="wire"><span><code>do</code> from <code>react</code>, <code>state</code> from the core · Bluetooth or USB</span></div></div>
+
+  <div class="frame c">
+    <span class="label">LinkKit (linkkit/)</span>
+    <ol class="hops">
+      <li class="hop">
+        <div class="box c"><b>LinkKit</b><p>Carries the messages over Bluetooth or USB. On the board it plays one request at a time: a <code>next</code> request waits for the current one to finish, up to its <code>ttl</code> (5 s here), then plays.</p></div>
+        <div class="pay"><span class="what"><code>ended</code> back to the Mac, once per <code>do</code></span>
+  <pre>{
+  "t": "ev",
+  "kind": "ended",
+  "data": { "id": 558386703, "how": "done" }
+}</pre>
+          <span class="small">Boop marks the reaction finished, and the next prompt tells Jev what Boop did.</span></div>
+      </li>
+    </ol>
+  </div>
+  <div class="link solo"><div class="wire"><span><code>state</code> and <code>do</code> down · <code>ended</code> and taps back up</span></div></div>
+  <ol class="hops">
+    <li class="hop">
+      <div class="box"><b>The device (firmware/)</b><p>Draws the face and plays the clip. There are two boards: the CYD, with a pixel-art face, and the AMOLED, with a soft gel face. A tap reacts on the board at once, then is reported to the Mac.</p></div>
+      <div class="pay"><span class="what">A tap, going back to the Mac</span>
+<pre>{
+  "t": "ev",
+  "kind": "tap",
+  "did": "poked"
+}</pre>
+        <span class="small">Boop records it as a poke, which also prompts Jev.</span></div>
+    </li>
+  </ol>
+  </div>
+
+  <h3>Three speeds</h3>
+  <div class="scroll"><table>
+    <thead><tr><th>Loop</th><th>Runs on</th><th>Handles</th><th>Never waits for</th></tr></thead>
+    <tbody>
+      <tr><td>Reflex (instant)</td><td>The device</td><td>Reacting to taps, blinking, the alert when an agent needs you, the order requests play in</td><td>The Mac</td></tr>
+      <tr><td>Reactive (fast)</td><td>The Mac's rules</td><td>A hook changing the screen, or a short animation a rule plays</td><td>Jev</td></tr>
+      <tr><td>Deliberative (slow)</td><td>MellowHarness and Jev</td><td>Every mood change and reaction, including to a finished turn</td><td>Nothing, and nothing waits for it</td></tr>
+    </tbody>
+  </table></div>
+  <p class="small">Each loop's time budget is in <a href="../internal/VERIFICATION.md">internal/VERIFICATION.md</a> §8.</p>
+</section>
+
+
+<section id="joins">
+  <h2>Where the pieces join</h2>
+  <p>Each package has its own vocabulary: agent-hooks has <code>AgentEvent</code>s, MellowHarness has <code>Event</code>s and lines, LinkKit has <code>state</code>, <code>do</code> and <code>ev</code>. Boop translates between them in the places below. Everything sent to the device goes out through <code>Runtime</code>.</p>
+  <div class="scroll"><table>
+    <thead><tr><th>From → to</th><th>Where</th><th>What happens</th></tr></thead>
+    <tbody>
+      <tr><td>agent-hooks → Boop</td><td><code>Adapter.event(from:)</code>, <code>Runtime.hook</code></td><td>Each hook line becomes an <code>AgentEvent</code>, kept as a MellowHarness <code>Event</code> with its facts in <code>data</code></td></tr>
+      <tr><td>agent-hooks → the rules</td><td><code>Core</code></td><td>agent-hooks' <code>SessionTracker</code> tracks each session and whether an agent needs you. The core adds what the screen shows, what takes priority, and the rules' short animations</td></tr>
+      <tr><td>Boop → MellowHarness</td><td><code>Pipeline</code></td><td>Each event is logged and run through the core's rules in one step. <code>TranscriptView</code> defines the sentence for each kind of event, and <code>Runtime</code> registers the two outputs, <code>mood</code> and <code>react</code></td></tr>
+      <tr><td>Boop → LinkKit (what the screen shows)</td><td><code>Runtime</code></td><td><code>link.update(state:)</code> on every change, on connect, in answer to <code>hello</code> and every 10 s</td></tr>
+      <tr><td>Boop → LinkKit (a rule's short animation)</td><td><code>Runtime.playRule</code></td><td><code>play: if_free</code>: sent at once, skipped while one of Jev's reactions is playing</td></tr>
+      <tr><td>Jev → LinkKit (reactions)</td><td><code>ReactAction</code> → <code>Runtime.queue</code></td><td><code>play: next</code> with a 5 s <code>ttl</code>. The reaction stays in progress until the device's <code>ended</code>, which <code>Reactions</code> reads</td></tr>
+      <tr><td>LinkKit → Boop</td><td><code>Runtime.device</code>, <code>Runtime.deviceEvent</code></td><td>A <code>tap</code> becomes a poke through the pipeline; <code>talk_on</code> and <code>talk_off</code> drive push-to-talk</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+
+</div>
+</body>
+</html>
