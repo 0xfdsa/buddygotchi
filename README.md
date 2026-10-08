@@ -56,8 +56,6 @@ with a screen is the body:
 | 🟨 **A board** | One of the two below, and a USB cable that carries data |
 | 🔑 **A Jev key** | Optional. [Jev](https://docs.typesafe.ai/api) is TypeSafe's small hosted model, and it's what picks Boop's reactions. It needs a key from TypeSafe, which may cost money. Without one, Boop still shows what your agents are doing and when you're needed, but doesn't react or celebrate. Add it in Boop's Settings |
 
-Not up for flashing a board? [Let us know you'd like a ready-made one →](https://tally.so/r/ZjprM5?src=readme-setup)
-
 ### Supported boards
 
 | Board | Screen | Touch | Connects over |
