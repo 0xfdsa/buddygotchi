@@ -27,6 +27,10 @@ them has been waiting on you for ten minutes. Boop noticed.
 It has moods of its own, and there's no reset button. It only watches:
 it never approves, denies or blocks anything an agent does.
 
+> **Would you like a ready-made Boop?** The software is free and stays MIT.
+> If you'd rather not flash a board yourself,
+> [let us know →](https://tally.so/r/ZjprM5?src=readme)
+
 <p align="center">
   <img src="documentation/media/moods.gif" width="720" alt="Eight of Boop's 13 moods reacting: excited, proud, curious, calm, grumpy, sad, tired and wounded">
 </p>
