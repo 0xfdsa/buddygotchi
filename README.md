@@ -27,6 +27,10 @@ them has been waiting on you for ten minutes. Boop noticed.
 It has moods of its own, and there's no reset button. It only watches:
 it never approves, denies or blocks anything an agent does.
 
+> **Would you like a ready-made Boop?** The software is free and stays MIT.
+> If you'd rather not flash a board yourself,
+> [let us know →](https://tally.so/r/ZjprM5?src=readme)
+
 <p align="center">
   <img src="documentation/media/moods.gif" width="720" alt="Eight of Boop's 13 moods reacting: excited, proud, curious, calm, grumpy, sad, tired and wounded">
 </p>
@@ -51,6 +55,8 @@ with a screen is the body:
 | 🐍 **Python 3.10 or later** | For flashing the board and for the dashboard. The Mac's own is 3.9, so `brew install python`. PlatformIO installs itself |
 | 🟨 **A board** | One of the two below, and a USB cable that carries data |
 | 🔑 **A Jev key** | Optional. [Jev](https://docs.typesafe.ai/api) is TypeSafe's small hosted model, and it's what picks Boop's reactions. It needs a key from TypeSafe, which may cost money. Without one, Boop still shows what your agents are doing and when you're needed, but doesn't react or celebrate. Add it in Boop's Settings |
+
+Not up for flashing a board? [Let us know you'd like a ready-made one →](https://tally.so/r/ZjprM5?src=readme-setup)
 
 ### Supported boards
 
